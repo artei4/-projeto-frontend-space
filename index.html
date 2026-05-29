@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OME-Tech — Painel de Controle de Missão</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<section class="alert-section" aria-label="Alertas Ativos do Sistema">
+    <h2 class="section-title">ALERTAS CRÍTICOS EM REPRODUÇÃO</h2>
+    
+    <article class="alert-box alert-critical-danger">
+        <i data-lucide="alert-octagon"></i>
+        <p>
+            <strong>[SITUAÇÃO EXTREMA - RADIAÇÃO CRÍTICA]:</strong> 
+            Radiação detectada superior a 100 mSv/h. Robô Orion moveu micro servo para 180° automaticamente (Blindagem ativa) e acionou sinal sonoro de 1500Hz via Piezo.
+        </p>
+    </article>
+
+    <article class="alert-box alert-critical-danger">
+        <i data-lucide="alert-triangle"></i>
+        <p>
+            <strong>[SITUAÇÃO EXTREMA - SUPERAQUECIMENTO]:</strong> 
+            Temperatura detectada superior a 250 °C. Ativação automática do módulo de resfriamento interno [AQD].
+        </p>
+    </article>
+</section>
+
+<main class="dashboard-main">
+    <div class="dashboard-wrapper">
+
+        <header class="mission-header">
+            <h1 class="mission-title">OME-TECH ORION</h1>
+
+            <p class="mission-status">
+                STATUS DA OPERAÇÃO:
+                <span class="status-online">
+                    CONEXÃO SECUNDÁRIA EDGELINK
+                </span>
+            </p>
+
+            <p class="operator-id">
+                Operador Autenticado: Arthur Bergami Lucas · RM 570679
+            </p>
+        </header>
+
+        <section class="telemetry-grid" aria-label="Painéis de Telemetria de Bordo">
+
+            <article class="telemetry-card">
+                <header class="card-header">
+                    <i data-lucide="thermometer"></i>
+                    <h2>TEMPERATURA NÚCLEO</h2>
+                </header>
+                <p class="telemetry-value text-safe">25.4 °C</p>
+                <footer class="card-footer-info">Margem de segurança operacional</footer>
+            </article>
+
+            <article class="telemetry-card">
+                <header class="card-header">
+                    <i data-lucide="shield-alert"></i>
+                    <h2>RADIAÇÃO IONIZANTE</h2>
+                </header>
+                <p class="telemetry-value text-safe">45 mSv/h</p>
+                <footer class="card-footer-info">Camada de Chumbo íntegra</footer>
+            </article>
+
+            <article class="telemetry-card">
+                <header class="card-header">
+                    <i data-lucide="cpu"></i>
+                    <h2>STATUS DO SERVO</h2>
+                </header>
+                <p class="telemetry-value text-highlight">0° (ABERTO)</p>
+                <footer class="card-footer-info">Escudo mecânico em prontidão</footer>
+            </article>
+
+        </section>
+
+        <section class="control-center" aria-label="Central de Simulações e Comandos">
+            <h2 class="section-title">SIMULAÇÃO DE CENÁRIOS E DIRETIVAS</h2>
+            
+            <nav class="quick-actions" aria-label="Ações de Emergência">
+                <button class="action-btn btn-warning">
+                    <i data-lucide="zap"></i>
+                    <span>FORÇAR APÊNDICES MODALIDADE PRT</span>
+                </button>
+
+                <button class="action-btn btn-warning">
+                    <i data-lucide="snowflake"></i>
+                    <span>ACIONAR DISPOSITIVO AQD</span>
+                </button>
+            </nav>
+        </section>
+
+        <section class="log-section" aria-label="Histórico Recente de Missão">
+            <h2 class="section-title">HISTÓRICO DE LOGS DA UNIDADE REMOTA</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Timestamp (Tempo Real)</th>
+                        <th>Módulo Afetado</th>
+                        <th>Leitura Bruta</th>
+                        <th>Ação Automatizada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>02:14:55:890</td>
+                        <td>Módulo Térmico A0</td>
+                        <td>12.5 °C</td>
+                        <td>Sinalizadores em loop [AQD] ativados</td>
+                    </tr>
+                    <tr>
+                        <td>02:15:02:112</td>
+                        <td>Potenciômetro Radiação A1</td>
+                        <td>340 mSv/h</td>
+                        <td>Servo posicionado a 180° [PRT]</td>
+                    </tr>
+                    <tr>
+                        <td>02:16:40:005</td>
+                        <td>Barramento de Rede</td>
+                        <td>-- Ping timeout</td>
+                        <td>Ativação de rotina Fail-Safe (10s offline)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="form-section" aria-label="Envio de Comandos Especiais">
+            <h2 class="section-title">REGISTRO DE DIRETIVA TÉCNICA MANUAL</h2>
+
+            <form class="custom-form">
+                <label for="component-select">Selecione o Subsistema:</label>
+                <select id="component-select" name="component">
+                    <option value="laser">Atualizar temperatura</option>
+                    <option value="valvula">Atualizar os níveis de radiação</option>
+                </select>
+
+                <label for="power-input">Potência Nominal Desejada:</label>
+                <input type="text" id="power-input" name="power" placeholder="Ex: 1500Hz / 45W">
+
+                <label for="tempo-select">Frequência de Atualização Automática (Espaço):</label>
+                <select id="tempo-select" name="tempo">
+                    <option value="0">Apenas Manual (Estático)</option>
+                    <option value="2000">A cada 2 Segundos (Rápido)</option>
+                    <option value="5000">A cada 5 Segundos (Padrão)</option>
+                    <option value="10000">A cada 10 Segundos (Longo)</option>
+                </select>
+
+                <button type="submit" class="submit-btn">ENVIAR TELEMETRIA PARA O PROTÓTIPO</button>
+            </form>
+        </section>
+
+        <footer class="dashboard-footer">
+            <p>&copy; 2026 OME-Tech Aerospace System Center</p>
+        </footer>
+
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
