@@ -1,3 +1,6 @@
+// Nomes: Davi Martins Herculano / RM: 572699 Arthur Bergami Lucas / RM: 570679
+// Módulo de Interatividade Extensão WD (Temporizador Dinâmico e Escuta de Acessibilidade)
+
 lucide.createIcons();
 
 /* =========================================================
@@ -29,7 +32,6 @@ let historicoRadiacao = [30, 35, 40, 42, 45];
 let historicoServo = [0, 0, 0, 0, 0];
 let telemetryChart = null;
 
-// Armazena o ID do temporizador ativo do BOM
 let intervaloSateliteId = null; 
 
 /* =========================================================
@@ -53,10 +55,12 @@ const modalInfo = document.querySelector("#modal-info");
 const closeModalBtn = document.querySelector(".close-modal");
 
 /* =========================================================
-   4. EVENTOS DE INTERAÇÃO (CLIQUES E MODAIS)
+   4. EVENTOS DE INTERAÇÃO (CLIQUES, MODAIS E ACESSIBILIDADE DE TECLADO)
    ========================================================= */
 telemetryCards.forEach((card, index) => {
     card.style.cursor = "pointer";
+    
+    // Disparo por evento de clique padrão (Mouse/Touch)
     card.addEventListener("click", () => {
         modalOverlay.style.display = "flex";
         if(index === 0){
@@ -70,6 +74,13 @@ telemetryCards.forEach((card, index) => {
         if(index === 2){
             modalInfo.innerHTML = `<strong>STATUS DO SERVO MECÂNICO:</strong> ${servoValue.textContent}`;
             criarGrafico("servo");
+        }
+    });
+
+    // ACESSIBILIDADE: Abre o modal ao focar via Tab e pressionar a tecla Enter
+    card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            card.click();
         }
     });
 });
@@ -142,18 +153,15 @@ function adicionarLog(modulo, leitura, acao){
    6. CONTROLE DO TEMPORIZADOR DINÂMICO (REQUISITO PROFESSOR)
    ========================================================= */
 function gerenciarTemporizador(tempoMs) {
-    // Limpa loops ativos anteriores para evitar acúmulo de memória
     if (intervaloSateliteId) {
         clearInterval(intervaloSateliteId);
         intervaloSateliteId = null;
     }
 
-    // Se o usuário escolheu um tempo automático (BOM), inicia o ciclo
     if (tempoMs > 0) {
         adicionarLog("Gerenciador BOM", `${tempoMs / 1000}s`, "Frequência automática ativada");
         
         intervaloSateliteId = setInterval(() => {
-            // Gera oscilações automáticas de dados se o sistema estiver operando normal
             if (radiacaoAtual <= 100 && temperaturaAtual <= 250) {
                 temperaturaAtual += (Math.random() * 6) - 3; 
                 radiacaoAtual += Math.floor(Math.random() * 8) - 4;
@@ -174,10 +182,8 @@ form.addEventListener("submit", (e) => {
     const valor = parseFloat(powerInput.value);
     const tempoEscolhido = parseInt(tempoSelect.value);
     
-    // Altera a frequência do timer conforme comando do usuário
     gerenciarTemporizador(tempoEscolhido);
 
-    // Se houver valor digitado, processa a injeção manual
     if (!isNaN(valor)) {
         if(componentSelect.value === "laser"){
             temperaturaAtual = valor;
@@ -265,5 +271,4 @@ function criarGrafico(tipo){
     });
 }
 
-// Inicializa a interface em modo estável e estático por padrão
 atualizarInterface();
