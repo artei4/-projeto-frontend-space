@@ -1,27 +1,23 @@
 /* ==========================================================================
-   DESIGN TOKENS (Fundo Unificado Integrado HUD)
+   DESIGN TOKENS
    ========================================================================== */
 :root {
-    --color-bg-deep: #0b0f19;        /* Cinza-espacial escuro absoluto */
-    --color-bg-card: #0b0f19;        /* CARD PRINCIPAL EXATAMENTE IGUAL AO FUNDO */
-    --color-border-tech: #000000;    /* Bordas técnicas visíveis */
-    --color-text-main: #f8fafc;      /* Texto principal */
-    --color-text-muted: #94a3b8;     /* Textos descritivos */
+    --color-bg-deep: #0b0f19;        
+    --color-bg-card: #0b0f19;        
+    --color-border-tech: #000000;    
+    --color-text-main: #f8fafc;      
+    --color-text-muted: #94a3b8;     
     
-    /* Tons Amarelos Solicitados */
-    --color-accent-yellow: #facc15;  /* Amarelo Cyber Principal */
-    --color-accent-hover: #eab308;   /* Amarelo Hover */
+    --color-accent-yellow: #facc15;  
+    --color-accent-hover: #eab308;   
     
-    /* Cores de Alerta */
     --color-safe-green: #10b981;     
     --color-warning-amber: #f59e0b;  
     --color-danger-red: #ef4444;     
 
-    /* Tipografia Exigida */
     --font-cyber: 'EB Garamond', serif;                  
     --font-ui: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
 
-    /* Espaçamentos e Estruturas */
     --gap-sm: 8px;
     --gap-md: 16px;
     --gap-lg: 24px;
@@ -54,7 +50,6 @@ body {
     min-height: 100vh;
     padding: 40px 20px;
     
-    /* Estrelas do espaço sideral nítidas */
     background-image: 
         radial-gradient(circle at 15% 20%, rgba(250, 204, 21, 0.06) 0%, transparent 40%), 
         radial-gradient(circle at 80% 65%, rgba(37, 114, 221, 0.08) 0%, transparent 40%),  
@@ -71,6 +66,17 @@ body {
     background-attachment: fixed !important;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+/* ACESSIBILIDADE: Indicadores de foco visíveis para navegação via teclado */
+:focus {
+    outline: 2px dashed var(--color-accent-yellow);
+    outline-offset: 4px;
+}
+
+.telemetry-card:focus {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-accent-yellow);
 }
 
 /* ==========================================================================
@@ -90,7 +96,7 @@ body {
 }
 
 /* ==========================================================================
-   COMPONENTES BASE (DASHBOARD FRAME UNIFICADO)
+   COMPONENTES BASE
    ========================================================================== */
 .dashboard-main {
     width: 100%;
@@ -105,7 +111,6 @@ body {
     gap: var(--gap-lg);
 }
 
-/* Regra da Div de Isolamento HTML */
 .dashboard-wrapper {
     display: flex;
     flex-direction: column;
@@ -113,7 +118,6 @@ body {
     width: 100%;
 }
 
-/* Header de Missão */
 .mission-header {
     width: 100%;
     border-bottom: 2px dashed var(--color-border-tech);
@@ -150,7 +154,6 @@ body {
     margin-top: 4px;
 }
 
-/* Linhas e Indicadores Amarelos de Seção */
 .section-title {
     font-family: var(--font-cyber);
     font-size: 1.3rem;
@@ -160,7 +163,6 @@ body {
     padding-left: var(--gap-sm);
 }
 
-/* Painéis de Telemetria (Grid) */
 .telemetry-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -168,7 +170,7 @@ body {
 }
 
 .telemetry-card {
-    background-color: rgba(255, 255, 255, 0.03); /* Leve contraste interno */
+    background-color: rgba(255, 255, 255, 0.03); 
     border: 1px solid var(--color-border-tech);
     border-radius: var(--border-radius-tech);
     padding: var(--gap-md);
@@ -217,7 +219,6 @@ body {
     color: var(--color-text-muted);
 }
 
-/* Botões e Painel de Ações */
 .quick-actions {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -252,15 +253,9 @@ body {
     box-shadow: inset 0 0 10px rgba(245, 158, 11, 0.1);
 }
 
-.action-btn:hover {
-    opacity: 0.8;
-}
+.action-btn:hover { opacity: 0.8; }
+.action-btn:active { transform: scale(0.98); }
 
-.action-btn:active {
-    transform: scale(0.98);
-}
-
-/* Caixas de Alerta Crítico */
 .alert-box {
     display: flex;
     align-items: flex-start;
@@ -277,24 +272,15 @@ body {
     border: 1px solid var(--color-danger-red);
     color: #fca5a5;
 }
-
-.alert-critical-danger i {
-    color: var(--color-danger-red);
-    flex-shrink: 0;
-}
+.alert-critical-danger i { color: var(--color-danger-red); flex-shrink: 0; }
 
 .alert-critical-warning {
     background-color: rgba(245, 158, 11, 0.15);
     border: 1px solid var(--color-warning-amber);
     color: #fde68a;
 }
+.alert-critical-warning i { color: var(--color-warning-amber); flex-shrink: 0; }
 
-.alert-critical-warning i {
-    color: var(--color-warning-amber);
-    flex-shrink: 0;
-}
-
-/* Tabelas (Histórico de Logs) */
 .data-table {
     width: 100%;
     border-collapse: collapse;
@@ -315,11 +301,8 @@ body {
     background-color: rgba(255, 255, 255, 0.02);
 }
 
-.data-table tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.04);
-}
+.data-table tbody tr:hover { background-color: rgba(255, 255, 255, 0.04); }
 
-/* Formulário Tecnológico */
 .custom-form {
     display: flex;
     flex-direction: column;
@@ -347,10 +330,7 @@ body {
     font-size: 0.9rem;
 }
 
-.custom-form select:focus, .custom-form input:focus {
-    outline: none;
-    border-color: var(--color-accent-yellow);
-}
+.custom-form select:focus, .custom-form input:focus { outline: none; border-color: var(--color-accent-yellow); }
 
 .submit-btn {
     background-color: var(--color-accent-yellow);
@@ -366,28 +346,18 @@ body {
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.submit-btn:hover {
-    background-color: var(--color-accent-hover);
-}
+.submit-btn:hover { background-color: var(--color-accent-hover); }
+.submit-btn:active { transform: scale(0.99); }
 
-.submit-btn:active {
-    transform: scale(0.99);
-}
-
-/* Rodapé */
 .dashboard-footer {
     width: 100%;
     border-top: 1px solid var(--color-border-tech);
     padding-top: var(--gap-md);
     text-align: center;
 }
+.dashboard-footer p { font-size: 0.75rem; color: var(--color-text-muted); }
 
-.dashboard-footer p {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-}
-
-/* Módulo de Modais e Gráficos Overlay */
+/* Modais */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -410,37 +380,37 @@ body {
     animation: modalFade .3s ease;
 }
 
-.modal-title {
-    margin-bottom: 20px;
-    font-family: var(--font-cyber);
-    color: var(--color-accent-yellow);
+.modal-title { margin-bottom: 20px; font-family: var(--font-cyber); color: var(--color-accent-yellow); }
+.close-modal { position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; border: none; border-radius: 50%; background: crimson; color: white; cursor: pointer; }
+
+@keyframes modalFade { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
+.text-danger { color: #ff3b3b; text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.5); }
+
+/* ==========================================================================
+   RESPONSIVIDADE: BREAKPOINTS DECLARADOS PARA COMPORTAMENTO MULTI-VIEWPORT
+   ========================================================================== */
+
+/* TABLET (Dispositivos até 768px de largura) */
+@media (max-width: 768px) {
+    body { padding: 20px 10px; }
+    .mission-title { font-size: 2.2rem; }
+    .telemetry-grid { grid-template-columns: repeat(2, 1fr); } /* Passa para duas colunas organizadas */
+    .dashboard-main { padding: var(--gap-md); }
 }
 
-.close-modal {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 30px;
-    height: 30px;
-    border: none;
-    border-radius: 50%;
-    background: crimson;
-    color: white;
-    cursor: pointer;
-}
-
-@keyframes modalFade {
-    from {
-        opacity: 0;
-        transform: scale(.8);
+/* MOBILE (Celulares compactos até 480px) */
+@media (max-width: 480px) {
+    .mission-title { font-size: 1.7rem; text-align: center; }
+    .mission-header { text-align: center; }
+    .telemetry-grid { grid-template-columns: 1fr; } /* Uma coluna única de leitura empilhada */
+    .quick-actions { grid-template-columns: 1fr; }
+    .telemetry-value { font-size: 1.5rem; }
+    
+    /* Proteção de overflow para tabelas de telemetria em visores pequenos */
+    .data-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
     }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.text-danger {
-    color: #ff3b3b;
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.5);
 }
